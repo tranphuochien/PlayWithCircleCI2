@@ -150,10 +150,10 @@ jobs:
         - *decode_gcloud_key
         - run:
             name: Set Google Cloud target project
-            command: gcloud config set project neptune-android
+            command: gcloud config set project playingwithcircleci2
         - run:
             name: Authenticate with Google Cloud
-            command: gcloud auth activate-service-account firebase-adminsdk-ojrni@neptune-android.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
+            command: gcloud auth activate-service-account firebase-adminsdk-73lgf@playingwithcircleci2.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
         - run:
             name: Run instrumented test on Firebase Test Lab
             command: |
@@ -170,7 +170,7 @@ jobs:
             command: mkdir firebase
         - run:
             name: Download instrumented test results from Firebase Test Lab
-            command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-x4hsbadixp1m2-i4n4wknmh0d5w | tail -1`*" /root/workspace/firebase/ | true
+            command: gsutil -m cp -r -U "`gsutil ls gs://test | tail -1`*" /root/workspace/firebase/ | true
         - *persist_firebase_workspace
         - store_artifacts:
             path: firebase/
@@ -209,9 +209,9 @@ workflows:
     jobs:
       - build_debug
       - test_unit
-#      - test_instrumented:
-#          requires:
-#            - build_debug
+      - test_instrumented:
+          requires:
+            - build_debug
 #      - report_coverage:
 #          requires:
 #            - test_unit
