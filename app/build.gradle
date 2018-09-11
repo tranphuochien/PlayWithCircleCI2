@@ -115,6 +115,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
+
+    implementation 'com.google.firebase:firebase-core:16.0.0'
 }
 
 
@@ -151,3 +153,5 @@ task jacocoTestReport(type: JacocoReport) {
     classDirectories = files([debugTree, debugTreeKotlin])
     executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
 }
+
+apply plugin: 'com.google.gms.google-services'
